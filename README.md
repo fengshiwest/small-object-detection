@@ -49,7 +49,7 @@ python tools_det/dataset/VisDrone_getFine.py
 
 ```
 
-```
+```shell
 # eval dataset
 
 python tools_det/dataset/VisDrone_getFine.py
