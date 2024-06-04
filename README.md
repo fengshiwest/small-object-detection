@@ -9,8 +9,7 @@
 
 ## Overview
 
-![plot](assets/workflow.jpg)
-
+![pipeline](assets/small_object_detection_pipeline.png)
 
 ## Highlight
 
@@ -24,20 +23,20 @@
 
 ## Data Prepare
 
-(Take the VisDrone dataset for an example.)
+Take the VisDrone dataset for an example.
 
 #### VisDrone to COCO Format
 
-```
+```shell
 python ./tools_det/dataset/VisDrone2COCO.py 
 ```
 
 #### Get Fine Image
 
-(Afer the coarse training stage)
+Afer the coarse training stage
 
-```
-### train dataset
+```shell
+# train dataset
 
 python tools_det/dataset/VisDrone_getFine.py
 ./work_dirs/gfocal_r50_fpn_1x_ciou_pretrained/gfocal_r50_fpn_1x_ciou_pretrained.py
@@ -51,7 +50,7 @@ python tools_det/dataset/VisDrone_getFine.py
 ```
 
 ```
-### eval dataset
+# eval dataset
 
 python tools_det/dataset/VisDrone_getFine.py
 ./work_dirs/gfocal_r50_fpn_1x_ciou_pretrained/gfocal_r50_fpn_1x_ciou_pretrained.py
@@ -66,7 +65,6 @@ python tools_det/dataset/VisDrone_getFine.py
 You will get the dataset folder structure as:
 
 ```
-
 --data
  |-annotations
    |-instances_train2017.json
@@ -109,7 +107,7 @@ First download the following checkpoints and save to './checkpoint'
 | fine_gfocal_r50_fpn_1x_ciou_pretrained.pth | [Baidu Disk](https://pan.baidu.com/s/1nrXvNQo6J5qhhKzyVpXNBQ?pwd=6666) |
 
 
-```
+```shell
 python tools_det/eval/VisDrone_eval.py ./configs/my_expn/gfocal/gfocal_r50_fpn_1x_ciou_pretrained.py ./checkpoint/gfocal_r50_fpn_1x_ciou_pretrained.pth ./configs/my_expn/gfocal/fine_gfocal_r50_fpn_1x_ciou_pretrained.py ./checkpoint/fine_gfocal_r50_fpn_1x_ciou_pretrained.pth ./data/VisDrone/annotations/instances_val2017.json ./data/VisDrone/VisDrone2019-DET-val/images/
 ```
 
@@ -117,20 +115,20 @@ python tools_det/eval/VisDrone_eval.py ./configs/my_expn/gfocal/gfocal_r50_fpn_1
 
 #### Coarse Stage
 
-```
+```shell
 python tools/train.py ./configs/my_expn/gfocal/gfocal_r50_fpn_1x_ciou_pretrained.py
 
 ```
 
 #### Fine Stage
 
-```
+```shell
 python tools/train.py ./configs/my_expn/gfocal/fine_gfocal_r50_fpn_1x_ciou_pretrained.py
 ```
 
 #### Distillation Stage
 
-```
+```shell
 python tools/train.py ./configs/my_expn/gmd/self_distill_gfocal_r50_fpn_1x_ciou_pretrained.py
 ```
 
